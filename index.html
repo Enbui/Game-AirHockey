@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link>
+    <style>
+        img {
+            display: none;
+        }
+
+        #game {
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+
+<body>
+
+   <audio id = "background" src = "./sound/background.mp3" loop autoplay></audio>
+    <audio id="click" src="sound/click.mp3" preload="auto"></audio>
+    <audio id="gamewin" src="sound/gamewin.mp3" preload="auto"></audio>
+    <audio id="gameover" src="sound/gameover.mp3" preload="auto"></audio>
+    <audio id="goal" src="sound/goal.mp3" preload="auto"></audio>
+    <audio id="balljump" src="sound/balljump.mp3" preload="auto"></audio>
+
+    <img id="img_backgroundgame" src="img/backgroundgame.png" />
+    <img id="img_font" src="img/font.png" />
+    <img id="img_logogame" src="img/logogame.png" />
+    <img id="img_playbutton" src="img/play.png" />
+    <img id = "img_titlegame" src = "img/titlegame.png" >
+
+    <img id="img_background" src="img/background.png" />
+    <img id="img_ball" src="img/ball.png" />
+    <img id="img_player" src="img/player.png" />
+    <img id="img_cpu" src="img/cpu.png" />
+
+    <img id="img_playsound" src = "img/playsound.png" />
+    <img id= "img_pausesound" src = "./img/pausesound.png"/>
+    
+    <img id= "0" src = "img/0.png" />
+    <img id= "1" src = "img/1.png" />
+    <img id= "2" src = "img/2.png" />
+    <img id= "3" src = "img/3.png" />
+    <img id= "4" src = "img/4.png" />
+    <img id= "5" src = "img/5.png" />
+    <img id= "6" src = "img/6.png" />
+    <img id= "7" src = "img/7.png" />
+    <img id= "8" src = "img/8.png" />
+    <img id= "9" src = "img/9.png" />
+
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+
+    <canvas id="game" width=600 height=700></canvas>
+    <script type="module" src="src/index.js"></script>
+
+</body>
+
+</html>
