@@ -1,5 +1,7 @@
 export default class Ball {
+
     constructor(game) {
+
         this.game = game;
         this.gameWidth = game.gameWidth;
         this.gameHeight = game.gameHeight;
@@ -11,10 +13,10 @@ export default class Ball {
         this.positionY = game.gameHeight / 2 - this.height / 2;
         this.speedX = 6;
         this.speedY = 6;
-
-
+        this.score = 0;
 
     }
+
     draw(context) {
         context.drawImage(this.img, this.positionX, this.positionY, this.width, this.height);
     }
@@ -25,9 +27,67 @@ export default class Ball {
         this.positionY += this.speedY;
 
         //handle ball collide left side and right side of wall
-        if (this.positionX <= 0 || this.positionX >= this.gameWidth - this.width) {
+
+        if (this.positionX <= 0) {
+
             document.getElementById("balljump").play();
-            this.speedX = - this.speedX;
+
+            if (this.speedX == 0) {
+
+                if (this.positionY <= 0) {
+                    this.speedX = 6;
+                    this.speedY = 6;
+                }
+
+                else if (this.positionY >= this.gameHeight - this.width) {
+                    this.speedX = 6;
+                    this.speedY = -6;
+                }
+
+                else {
+                    if(this.speedY > 0) {
+                        this.speedY = 6 * Math.sqrt(2);
+                    }
+                    else {
+                        this.speedY = -6 * Math.sqrt(2);
+                    }
+                }
+            }
+
+            else {
+                this.speedX = - this.speedX;
+            }
+
+        }
+
+        else if (this.positionX >= this.gameWidth - this.width) {
+
+            document.getElementById("balljump").play();
+
+             if (this.speedX == 0) {
+                if (this.positionY <= 0) {
+                    this.speedX = -6;
+                    this.speedY = 6;
+                }
+
+                else if (this.positionY >= this.gameHeight - this.width) {
+                    this.speedX = -6;
+                    this.speedY = -6;
+                }
+
+                else {
+                    if(this.speedY > 0) {
+                        this.speedY = 6 * Math.sqrt(2);
+                    }
+                    else {
+                        this.speedY = -6 * Math.sqrt(2);
+                    }
+                }
+            }
+
+            else {
+                this.speedX = - this.speedX;
+            }
         }
 
         //handle ball collide above side and below side of wall
@@ -39,8 +99,10 @@ export default class Ball {
                 this.speedY = - this.speedY;
             }
             else {
-                document.getElementById("balljump").play();
-                this.game.lives --;
+                document.getElementById("goal").play();
+                this.score++;
+                console.log(this.score);
+                this.game.reset();
             }
         }
 
@@ -51,9 +113,9 @@ export default class Ball {
                 this.speedY = - this.speedY;
             }
             else {
-                document.getElementById("balljump").play();
-                this.game.lives --;
-                
+                document.getElementById("lost").play();
+                this.game.lives--;
+
             }
         }
 
@@ -63,7 +125,7 @@ export default class Ball {
         let dy1 = this.positionY - this.game.player.positionY - 40;
         let distance1 = Math.sqrt(dx1 * dx1 + dy1 * dy1);
 
-        
+
 
         if (distance1 <= (this.width + this.game.player.width) / 2) {
             document.getElementById("balljump").play();
@@ -84,21 +146,5 @@ export default class Ball {
         }
 
     }
-
-    reset() {
-        this.positionX = (this.gameWidth - this.width) /2;
-        this.positionY = (this.gameHeight-this.height)/2;
-
-        this.game.player.positionX = game.gameWidth / 2 - this.width / 2;
-        this.game.player.positionY = game.gameHeight - this.height - 20;
-
-        this.game.cpu.positionX = game.gameWidth / 2 - this.width / 2;
-        this.game.cpu.positionY = 20;
-
-        // todo
-
-    }
-
-
 
 }

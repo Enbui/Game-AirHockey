@@ -33,22 +33,13 @@ function gameLoop(timestamp) {
     requestAnimationFrame(gameLoop);
 }
 
-/* document.getElementById("button").onclick = function () {
-
-    document.getElementById("click").play();
-    document.getElementById("start_game").style.display = "none";
-    game.start();
-    requestAnimationFrame(gameLoop);
-
-}   */
-
 function DrawBackground() {
     context.drawImage(imgBackgroundGame, 0, 0, GAME_WIDTH, GAME_HEIGHT);
     context.drawImage(imgFont, 20, 20);
     context.drawImage(imgLogo, 40, 40);
-    context.drawImage(imgStartButton, 200, 400);
+    context.drawImage(imgStartButton, 175, 500);
     context.drawImage(imgSound, 20, 180);
-    context.drawImage(imgTitleGame, 160, 40);
+    context.drawImage(imgTitleGame, 150, 40);
 }
 
 
@@ -59,10 +50,9 @@ canvas.addEventListener('click', function (event) {
     let cPos = { x: canvas.offsetLeft, y: canvas.offsetTop };
     let rPos = { x: cursor.x - canvas.offsetLeft, y: cursor.y - canvas.offsetTop };
 
-    if (rPos.x > 200 && rPos.y > 400 &&
-        rPos.x < 400 && rPos.y < 450) {
+    if (rPos.x > 175 && rPos.y > 500 &&
+        rPos.x < 425 && rPos.y < 590) {
         document.getElementById("click").play();
-        //game.start();
         requestAnimationFrame(gameLoop);
     }
 });
@@ -77,10 +67,12 @@ canvas.addEventListener('click', function (event) {
 
          if (soundBackground.duration > 0 && !soundBackground.paused) {
             imgSound.src = "./img/playsound.png";
+            context.drawImage(imgSound, 20, 180);
             soundBackground.pause();
         }
         else if (soundBackground.paused) {
-            imgSound.src = "./img/pausesound.png"
+            imgSound.src = "./img/pausesound.png";
+            context.drawImage(imgSound, 20, 180);
             soundBackground.play();
         }
 

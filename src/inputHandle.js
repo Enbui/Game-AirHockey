@@ -1,8 +1,5 @@
-//import Game from "./game";
-
-
 export default class InputHandle {
-    constructor(player,game) {
+    constructor(player, game) {
 
         document.addEventListener("keydown", (event) => {
             switch (event.keyCode) {
@@ -24,15 +21,22 @@ export default class InputHandle {
                     player.moveDown();
                     break;
 
-                case 27 :
+                case 27:
                     document.getElementById("click").play();
                     game.togglePause();
                     break;
 
-                case 32 :
-                    document.getElementById("click").play();
-                    game.start();
-                    break;
+                case 32:
+                    if (this.game.state === GAME_STATE.GAMEOVER) {
+                        this.game.ball.score = 0;
+                        this.game.reset();
+                    }
+                    else {
+                        document.getElementById("click").play();
+                        game.start();
+                        break;
+                    }
+
 
             }
         });
