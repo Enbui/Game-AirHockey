@@ -20,14 +20,14 @@ IMG_RESTART.src = "./img/restart.png";
 const IMG_PAUSE = new Image(270, 90);
 IMG_PAUSE.src = "./img/pause.png";
 
-const IMG_OPTION1 = new Image(417,33);
-IMG_OPTION1.src = "./img/option 1.png";
+const IMG_OPTION1 = new Image(477, 49);
+IMG_OPTION1.src = "./img/option1.png";
 
-const IMG_OPTION2 = new Image(455,33);
-IMG_OPTION1.src = "./img/option 2.png";
+const IMG_OPTION2 = new Image(574, 50);
+IMG_OPTION2.src = "./img/option2.png";
 
-const IMG_OPTION3 = new Image(399,34);
-IMG_OPTION3.src = "./img/option 3.png";
+const IMG_OPTION3 = new Image(451, 48);
+IMG_OPTION3.src = "./img/option3.png";
 
 
 const GAME_STATE = {
@@ -77,6 +77,7 @@ export default class Game {
         this.cpu.draw(context);
 
         if (this.gameState === GAME_STATE.PAUSED) {
+            context.clearRect(0, 0, this.gameWidth, this.gameHeight);
             context.rect(0, 0, this.gameWidth, this.gameHeight);
             context.fillStyle = "rgba(0,0,0,0.5)";
             context.fill();
@@ -86,17 +87,17 @@ export default class Game {
         }
 
         if (this.gameState === GAME_STATE.MENU) {
+            context.clearRect(0, 0, this.gameWidth, this.gameHeight);
             context.rect(0, 0, this.gameWidth, this.gameHeight);
             context.fillStyle = "rgba(0,0,0,1)";
             context.fill();
             context.drawImage(IMG_GAMESTART, (this.gameWidth - 350) / 2, (this.gameHeight - 120) / 2);
-            context.drawImage(IMG_OPTION1, 40,600);
-            context.drawImage(IMG_OPTION3, 40,700);
-
-
+            context.drawImage(IMG_OPTION1, 13, 500);
+            context.drawImage(IMG_OPTION2, 13, 580);
         }
 
         if (this.gameState == GAME_STATE.GAMEOVER) {
+            context.clearRect(0, 0, this.gameWidth, this.gameHeight);
             document.getElementById("background").pause();
             document.getElementById("gameover").play();
             context.rect(0, 0, this.gameWidth, this.gameHeight);
@@ -104,8 +105,7 @@ export default class Game {
             context.fill();
             context.drawImage(IMG_GAMEOVER, (this.gameWidth - 450) / 2, 150);
             context.drawImage(IMG_SCORE, (this.gameWidth - 400) / 2, 310);
-            context.drawImage(IMG_OPTION2, 40,560);
-           // context.drawImage(IMG_RESTART, (this.gameWidth - 210) / 2, 560);
+            context.drawImage(IMG_OPTION3, 70, 560);
             this.score.draw(context);
 
         }
@@ -123,6 +123,25 @@ export default class Game {
 
         this.cpu.positionX = this.gameWidth / 2 - this.cpu.width / 2;
         this.cpu.positionY = 20;
+    }
+
+    restart() {
+        if (this.gameState === GAME_STATE.GAMEOVER) {
+            this.lives = 1;
+            this.gameState = GAME_STATE.MENU;
+            this.ball.score = 0;
+
+            this.ball.positionX = (this.gameWidth - this.ball.width) / 2;
+            this.ball.positionY = (this.gameHeight - this.ball.height) / 2;
+            this.ball.speedX = 6;
+            this.ball.speedY = 6;
+
+            this.player.positionX = this.gameWidth / 2 - this.player.width / 2;
+            this.player.positionY = this.gameHeight - this.player.height - 20;
+
+            this.cpu.positionX = this.gameWidth / 2 - this.cpu.width / 2;
+            this.cpu.positionY = 20;
+        }
     }
 
     togglePause() {

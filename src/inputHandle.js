@@ -27,17 +27,14 @@ export default class InputHandle {
                     break;
 
                 case 32:
-                    if (this.game.state === GAME_STATE.GAMEOVER) {
-                        this.game.ball.score = 0;
-                        this.game.reset();
-                    }
-                    else {
-                        document.getElementById("click").play();
-                        game.start();
-                        break;
-                    }
+                    document.getElementById("click").play();
+                    game.start();
+                    break;
 
-
+                case 13 :
+                    document.getElementById("click").play();
+                    game.restart();
+                    break;
             }
         });
 
